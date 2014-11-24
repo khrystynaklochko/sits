@@ -1,0 +1,65 @@
+.row-fluid
+  .span12
+    %h1 Listing tickets
+    .row-fluid
+      .span3
+        .row-fluid
+          .span12
+            %h4 Open by Ticket key
+            .well.well-small 
+              = collection_select(:ticket, :key, Ticket.all, :key, :key)
+        .row-fluid
+          .span12
+            %h4 Search in subject and description
+            .well.well-small 
+              .form-search
+                .input-append
+                  %input.input-medium.centered.search-query{:type => "text", :value => params[:query]}
+                  %button.btn.search{:type => "submit"}
+                    %i.icon-search
+
+        .row-fluid
+          %form.span12.filters
+            %h4 Filter by params
+            .well.well-small 
+              %p.bold Department
+              - Department.all.each do |f|
+                %label.checkbox
+                  %input{ type: :checkbox, name: "department[]", value: f.id, checked: params[:department] && params[:department].include?(f.id.to_s) }= f.name
+            .well.well-small 
+              %p.bold Status
+              - Status.all.each do |f|
+                %label.checkbox
+                  %input{ type: :checkbox, name: "status[]", value: f.id, checked: params[:status] && params[:status].include?(f.id.to_s) }= f.title
+            .well.well-small 
+              %p.bold Assigned
+              %label.checkbox
+                %input{ type: :checkbox, name: "operator[]", value: @filter[:operator][:me_id], checked: params[:operator] && params[:operator].include?(@filter[:operator][:me_id].to_s) } To me
+              %label.checkbox
+                %input{ type: :checkbox, name: "operator[]", value: @filter[:operator][:other], checked: params[:operator] && params[:operator].include?(@filter[:operator][:other].to_s) } To other
+              %label.checkbox
+                %input{ type: :checkbox, name: "not_assigned[]", value: true, checked: params[:not_assigned] } Not assigned
+
+      .span9
+
+        %table.table.table-hover.table-striped.table-bordered
+          %tr
+            %th Key
+            %th Username
+            %th Email
+            %th Subject
+            %th Status
+            %th Department
+            %th Operator
+            %th
+            
+          - @tickets.each do |ticket|
+            %tr
+              %td= ticket.key
+              %td= ticket.username
+              %td= ticket.email
+              %td= ticket.subject
+              %td= ticket.status
+              %td= ticket.department
+              %td= ticket.operator
+              %td= link_to 'show', ticket

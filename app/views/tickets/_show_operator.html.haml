@@ -1,0 +1,74 @@
+.row-fluid
+  .span12
+    .well
+      %dl.dl-horizontal
+        %dt Id:
+        %dd= @ticket.id
+        %dt Username:
+        %dd= @ticket.username
+        %dt Email:
+        %dd= @ticket.email
+        %dt Created:
+        %dd= @ticket.created_at
+        %dt Last update:
+        %dd= @ticket.last_update
+      %h4 Last version
+      %hr/
+      %blockquote
+        %p= from_title(@ticket.last_version)
+        %small= @ticket.last_update
+      .clearfix
+      %dl.dl-horizontal
+        %dt Subject:
+        %dd= @ticket.subject
+        %dt Body:
+        %dd= @ticket.description
+        - if @ticket.operator
+          %dt Operator:
+          %dd= @ticket.operator
+        - if @ticket.department
+          %dt Department:
+          %dd= @ticket.department
+        - if @ticket.status
+          %dt Status:
+          %dd= @ticket.status
+      %h4 History
+      %hr/
+      - @ticket.tickets_versions.each do |version|
+        %blockquote
+          %p= from_title(version)
+          %small= version.updated_at
+        .clearfix
+        %dl.dl-horizontal
+          %dt Subject:
+          %dd= version.subject
+          %dt Body:
+          %dd= version.description
+          - if version.operator
+            %dt Operator:
+            %dd= version.operator.name
+          - if version.department
+            %dt Department:
+            %dd= version.department.name
+          - if version.status
+            %dt Status:
+            %dd= version.status.title
+
+    
+    %button.btn.btn-primary.show_tv_form Add comment/Create responce/Change
+    .hidden.ticket_version_form
+      = simple_form_for(@tickets_version) do |f|
+        = f.error_notification
+
+        .form-inputs
+          = f.association :ticket, as: :hidden
+          = f.association :department, input_html: { class: 'span12' }
+          = f.association :status, input_html: { class: 'span12' }
+          = f.association :operator, input_html: { class: 'span12' }
+          = f.input :subject, input_html: { class: 'span12' }
+          = f.input :description, label: 'Body', input_html: { class: 'span12' }
+          = f.input :from, as: :hidden, input_html: { value: 'operator' }
+
+        .form-actions
+          = f.button :submit, 'Add'
+          %button.btn.hide_tv_form.hidden Cancel

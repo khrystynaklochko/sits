@@ -1,0 +1,17 @@
+%h1 New ticket
+
+= simple_form_for(@ticket) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :username, input_html: { class: 'span12' }
+    = f.input :email, input_html: { class: 'span12' }
+    = f.simple_fields_for :tickets_types do |type|
+      = type.association :department, input_html: { class: 'span12' }
+      = type.association :status, input_html: { class: 'span12' }
+      = type.input :subject, input_html: { class: 'span12' }
+      = type.input :description, input_html: { class: 'span12' }
+      = type.input :from, as: :hidden, input_html: { value: 'client' }
+
+  .form-actions
+    = f.button :submit

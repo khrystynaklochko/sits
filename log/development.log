@@ -1,0 +1,1602 @@
+  [1m[36m (40.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTickets (20141123233153)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (36.7ms)[0m  [1mCREATE TABLE "tickets" ("id" serial primary key, "username" character varying(255), "email" character varying(255), "key" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX  "index_tickets_on_key" ON "tickets"  ("key")
+  [1m[36mSQL (6.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141123233153"]]
+  [1m[35m (12.3ms)[0m  COMMIT
+Migrating to CreateTicketsTypes (20141123233212)
+  [1m[36m (6.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (32.4ms)[0m  CREATE TABLE "tickets_types" ("id" serial primary key, "ticket_id" integer, "department_id" integer, "status_id" integer, "operator_id" integer, "subject" character varying(255), "description" text, "from" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX  "index_tickets_types_on_ticket_id" ON "tickets_types"  ("ticket_id")[0m
+  [1m[35m (0.8ms)[0m  CREATE  INDEX  "index_tickets_types_on_department_id" ON "tickets_types"  ("department_id")
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX  "index_tickets_types_on_status_id" ON "tickets_types"  ("status_id")[0m
+  [1m[35m (0.7ms)[0m  CREATE  INDEX  "index_tickets_types_on_operator_id" ON "tickets_types"  ("operator_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141123233212"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to CreateStatuses (20141123233227)
+  [1m[36m (6.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.7ms)[0m  CREATE TABLE "statuses" ("id" serial primary key, "title" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141123233227"]]
+  [1m[35m (6.1ms)[0m  COMMIT
+Migrating to CreateDepartments (20141123233245)
+  [1m[36m (11.6ms)[0m  [1mBEGIN[0m
+  [1m[35m (8.9ms)[0m  CREATE TABLE "departments" ("id" serial primary key, "name" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141123233245"]]
+  [1m[35m (5.1ms)[0m  COMMIT
+Migrating to CreateOperators (20141123233255)
+  [1m[36m (12.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (13.9ms)[0m  CREATE TABLE "operators" ("id" serial primary key, "name" character varying(255), "email" character varying(255), "password_digest" character varying(255), "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141123233255"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 01:59:57 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+Redirected to https://0.0.0.0/
+Filter chain halted as #<Proc:0x007fbf4a1a0250@/Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 13ms (ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:45:14 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (6.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 6ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (13.3ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (40.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:50:28 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 6ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (10.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (33.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:51:26 +0200
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 3ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:53:37 +0200
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 3ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:53:49 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 5ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (9.3ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (23.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:55:01 +0200
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 18ms
+
+NoMethodError (undefined method `tickets_versions' for #<Ticket:0x007fa20340dd08>):
+  app/controllers/tickets_controller.rb:32:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:55:21 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (54.9ms)
+Completed 500 Internal Server Error in 86ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:58:51 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (3.5ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___4561703528001164096_70166956745600'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (14.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 02:59:09 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (58.8ms)
+Completed 500 Internal Server Error in 91ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (14.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:22:52 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (22.7ms)
+Completed 500 Internal Server Error in 40ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248099793520'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (5.4ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (27.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:24:41 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (7.1ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :departments, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248099512440'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248099512440'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248099512440'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:32:12 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (5.5ms)
+Completed 500 Internal Server Error in 8ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:32:13 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (4.1ms)
+Completed 500 Internal Server Error in 6ms
+
+ActionView::Template::Error (Association cannot be used in forms not associated with an object):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_versions do |version|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248166544760'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:34:05 +0200
+Processing by TicketsController#new as HTML
+  Rendered tickets/new.html.haml within layouts/application (23.7ms)
+Completed 500 Internal Server Error in 26ms
+
+ActionView::Template::Error (undefined local variable or method `version' for #<#<Class:0x007fc7d3153a90>:0x007fc7d2ed7c08>):
+     7:     = f.input :username, input_html: { class: 'span12' }
+     8:     = f.input :email, input_html: { class: 'span12' }
+     9:     = f.simple_fields_for :tickets_types do |types|
+    10:       = version.association :department, input_html: { class: 'span12' }
+    11:       = version.association :status, input_html: { class: 'span12' }
+    12:       = version.input :subject, input_html: { class: 'span12' }
+    13:       = version.input :description, input_html: { class: 'span12' }
+  app/views/tickets/new.html.haml:10:in `block (2 levels) in _app_views_tickets_new_html_haml___1516642044817269432_70248106996840'
+  app/views/tickets/new.html.haml:9:in `block in _app_views_tickets_new_html_haml___1516642044817269432_70248106996840'
+  app/views/tickets/new.html.haml:3:in `_app_views_tickets_new_html_haml___1516642044817269432_70248106996840'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:35:00 +0200
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (13.9ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (6.8ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (49.9ms)
+Completed 500 Internal Server Error in 130ms
+
+ActionView::Template::Error (couldn't find file 'turbolinks'
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts/application.js:15)):
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+    9:     = render 'shared/navigation'
+  app/views/layouts/application.haml:6:in `_app_views_layouts_application_haml___4046198284138495685_70248099598820'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (10.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:36:09 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (70.2ms)
+  Rendered shared/_navigation.haml (3.4ms)
+  Rendered shared/_flash.haml (2.0ms)
+Completed 200 OK in 899ms (Views: 856.9ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/assets/departments.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/ti%D1%81kets.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/operators.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/scaffold.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/statuses.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/tickets.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/tickets_types.css?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:36:11 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:37:25 +0200
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (10.0ms)
+Completed 500 Internal Server Error in 182ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:1)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:1
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml___4141388814269922303_70281288506740'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:39:56 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.4ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.3ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (47.7ms)
+Completed 500 Internal Server Error in 174ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:1)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:1
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml___834734580058145238_70150915591220'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:40:21 +0200
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.4ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (11.5ms)
+Completed 500 Internal Server Error in 19ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:1)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:1
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml___834734580058145238_70150915591220'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (7.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:45:28 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (40.2ms)
+Completed 500 Internal Server Error in 1131ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap/responsive.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/coffee-rails-4.0.1/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/images
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:2)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:2
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml___3399335145881771_70279295676680'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:46:57 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.3ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (39.4ms)
+Completed 500 Internal Server Error in 535ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap/responsive.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/coffee-rails-4.0.1/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/images
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:2)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:2
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml__2510358621601873971_70362671452280'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (8.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:47:00 +0200
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (11.4ms)
+Completed 500 Internal Server Error in 468ms
+
+ActionView::Template::Error (File to import not found or unreadable: bootstrap/responsive.
+Load paths:
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/images
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/javascripts
+  /Users/khrystynaklochko/Desktop/projects/sits/vendor/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/jquery-rails-3.1.2/vendor/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/font-awesome-rails-4.2.0.0/app/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/coffee-rails-4.0.1/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/turbolinks-2.5.2/lib/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/javascripts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/fonts
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/images
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.2.0.2/assets/stylesheets
+  (in /Users/khrystynaklochko/Desktop/projects/sits/app/assets/stylesheets/bootstrap_and_overrides.css.scss:2)):
+    2: %html
+    3:   %head
+    4:     %title Sit
+    5:     = stylesheet_link_tag    "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = csrf_meta_tags
+    8:   %body
+  app/assets/stylesheets/bootstrap_and_overrides.css.scss:2
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml__2510358621601873971_70362671452280'
+  app/controllers/tickets_controller.rb:34:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (9.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:47:50 +0200
+Processing by TicketsController#new as HTML
+  [1m[35mDepartment Load (0.3ms)[0m  SELECT "departments".* FROM "departments"
+  [1m[36mStatus Load (0.2ms)[0m  [1mSELECT "statuses".* FROM "statuses"[0m
+  Rendered tickets/new.html.haml within layouts/application (11.6ms)
+  Rendered shared/_navigation.haml (4.8ms)
+  Rendered shared/_flash.haml (1.9ms)
+Completed 200 OK in 1288ms (Views: 1286.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:47:51 +0200
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:48:02 +0200
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `const_get'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `block in constantize'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:78:in `controller_reference'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:68:in `controller'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:46:in `call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:73:in `block in call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:678:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.7) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.7) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.7) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.7) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/ssl.rb:24:in `call'
+  railties (4.1.7) lib/rails/engine.rb:514:in `call'
+  railties (4.1.7) lib/rails/application.rb:144:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  thin (1.6.3) lib/thin/controllers/controller.rb:87:in `start'
+  thin (1.6.3) lib/thin/runner.rb:200:in `run_command'
+  thin (1.6.3) lib/thin/runner.rb:156:in `run!'
+  thin (1.6.3) bin/thin:6:in `<top (required)>'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `load'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `<main>'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (46.3ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:48:02 +0200
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `const_get'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `block in constantize'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:78:in `controller_reference'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:68:in `controller'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:46:in `call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:73:in `block in call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:678:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.7) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.7) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.7) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.7) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/ssl.rb:24:in `call'
+  railties (4.1.7) lib/rails/engine.rb:514:in `call'
+  railties (4.1.7) lib/rails/application.rb:144:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  thin (1.6.3) lib/thin/controllers/controller.rb:87:in `start'
+  thin (1.6.3) lib/thin/runner.rb:200:in `run_command'
+  thin (1.6.3) lib/thin/runner.rb:156:in `run!'
+  thin (1.6.3) bin/thin:6:in `<top (required)>'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `load'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `<main>'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (38.4ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:48:12 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 10ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (18.9ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:48:12 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.3ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:48:55 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.6ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:48:55 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.6ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:13 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.2ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:33 +0200
+Processing by OperatorsController#new as HTML
+Completed 500 Internal Server Error in 2ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/operator.rb:6:in `<class:Operator>'
+  app/models/operator.rb:1:in `<top (required)>'
+  app/controllers/operators_controller.rb:14:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (10.6ms)
+  Rendered operators/new.html.haml within layouts/application (12.9ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 83ms (Views: 78.9ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:49:51 +0200
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:53 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.6ms)
+  Rendered operators/new.html.haml within layouts/application (5.1ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 72ms (Views: 71.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:55 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (5.0ms)
+  Rendered operators/new.html.haml within layouts/application (5.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 71ms (Views: 70.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:57 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (5.3ms)
+  Rendered operators/new.html.haml within layouts/application (6.0ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 74ms (Views: 73.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:57 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.9ms)
+  Rendered operators/new.html.haml within layouts/application (5.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 72ms (Views: 71.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:49:58 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.7ms)
+  Rendered operators/new.html.haml within layouts/application (5.2ms)
+  Rendered shared/_navigation.haml (0.5ms)
+  Rendered shared/_flash.haml (0.2ms)
+Completed 200 OK in 73ms (Views: 72.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:49:59 +0200
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `const_get'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `block in constantize'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:78:in `controller_reference'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:68:in `controller'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:46:in `call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:73:in `block in call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:678:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.7) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.7) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.7) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.7) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/ssl.rb:24:in `call'
+  railties (4.1.7) lib/rails/engine.rb:514:in `call'
+  railties (4.1.7) lib/rails/application.rb:144:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  thin (1.6.3) lib/thin/controllers/controller.rb:87:in `start'
+  thin (1.6.3) lib/thin/runner.rb:200:in `run_command'
+  thin (1.6.3) lib/thin/runner.rb:156:in `run!'
+  thin (1.6.3) bin/thin:6:in `<top (required)>'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `load'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `<main>'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (48.2ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:49:59 +0200
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `const_get'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:238:in `block in constantize'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `each'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `inject'
+  activesupport (4.1.7) lib/active_support/inflector/methods.rb:236:in `constantize'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:78:in `controller_reference'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:68:in `controller'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:46:in `call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:73:in `block in call'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.1.7) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.1.7) lib/action_dispatch/routing/route_set.rb:678:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/flash.rb:254:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.1.7) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.1.7) lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+  activerecord (4.1.7) lib/active_record/migration.rb:380:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.7) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.7) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.7) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.7) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  actionpack (4.1.7) lib/action_dispatch/middleware/ssl.rb:24:in `call'
+  railties (4.1.7) lib/rails/engine.rb:514:in `call'
+  railties (4.1.7) lib/rails/application.rb:144:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.3) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  thin (1.6.3) lib/thin/controllers/controller.rb:87:in `start'
+  thin (1.6.3) lib/thin/runner.rb:200:in `run_command'
+  thin (1.6.3) lib/thin/runner.rb:156:in `run!'
+  thin (1.6.3) bin/thin:6:in `<top (required)>'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `load'
+  /Users/khrystynaklochko/.rbenv/versions/2.1.0/bin/thin:23:in `<main>'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.9ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (43.1ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:51:47 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (5.9ms)
+  Rendered shared/_navigation.haml (3.1ms)
+  Rendered shared/_flash.haml (2.7ms)
+Completed 200 OK in 86ms (Views: 85.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2014-11-24 03:51:58 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"D6hfhxqKwiXZVw7mjkyekmeZ5euYdMdze7DyzCqzReU=", "session"=>{"email"=>"tinka92k@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mOperator Load (24.1ms)[0m  SELECT  "operators".* FROM "operators"  WHERE "operators"."email" = 'tinka92k@gmail.com' LIMIT 1
+  Rendered sessions/new.haml within layouts/application (4.1ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.2ms)
+Completed 200 OK in 110ms (Views: 74.9ms | ActiveRecord: 25.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:51:59 +0200
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:52:00 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (7.6ms)
+  Rendered operators/new.html.haml within layouts/application (8.7ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 87ms (Views: 86.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:52:01 +0200
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:52:09 +0200
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 4ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.8ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (17.6ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:52:09 +0200
+Processing by TicketsController#new as HTML
+Completed 500 Internal Server Error in 3ms
+
+ArgumentError (The provided regular expression is using multiline anchors (^ or $), which may present a security risk. Did you mean to use \A and \z, or forgot to add the :multiline => true option?):
+  app/models/ticket.rb:7:in `<class:Ticket>'
+  app/models/ticket.rb:1:in `<top (required)>'
+  app/controllers/tickets_controller.rb:31:in `new'
+
+
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/khrystynaklochko/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/actionpack-4.1.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.0ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.3ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.3ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (23.7ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 110ms (Views: 95.1ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:10 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:53:17 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (10.0ms)
+  Rendered shared/_navigation.haml (0.4ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 84ms (Views: 82.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:53:22 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.3ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (10.6ms)
+  Rendered shared/_navigation.haml (0.4ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 81ms (Views: 79.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:22 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.8ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 72ms (Views: 71.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:23 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (11.1ms)
+  Rendered operators/new.html.haml within layouts/application (12.3ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 88ms (Views: 84.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:24 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.7ms)
+  Rendered shared/_navigation.haml (0.5ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 81ms (Views: 81.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:53:25 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (10.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 85ms (Views: 83.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:53:26 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (11.1ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 86ms (Views: 84.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:27 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 71ms (Views: 70.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:28 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (5.0ms)
+  Rendered operators/new.html.haml within layouts/application (5.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 80ms (Views: 79.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:28 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.8ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 68ms (Views: 67.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:29 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.9ms)
+  Rendered operators/new.html.haml within layouts/application (5.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 84ms (Views: 82.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:29 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.8ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 80ms (Views: 79.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:29 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (5.4ms)
+  Rendered operators/new.html.haml within layouts/application (6.4ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 87ms (Views: 86.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:30 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.7ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 82ms (Views: 81.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:30 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.9ms)
+  Rendered operators/new.html.haml within layouts/application (5.5ms)
+  Rendered shared/_navigation.haml (0.4ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 76ms (Views: 75.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:30 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 69ms (Views: 68.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/tickets/new" for 127.0.0.1 at 2014-11-24 03:53:31 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (9.9ms)
+  Rendered shared/_navigation.haml (0.4ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 82ms (Views: 80.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-24 03:53:33 +0200
+Processing by TicketsController#new as HTML
+  [1m[36mDepartment Load (0.2ms)[0m  [1mSELECT "departments".* FROM "departments"[0m
+  [1m[35mStatus Load (0.1ms)[0m  SELECT "statuses".* FROM "statuses"
+  Rendered tickets/new.html.haml within layouts/application (9.6ms)
+  Rendered shared/_navigation.haml (0.4ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 81ms (Views: 79.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:34 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 81ms (Views: 80.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:34 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (5.1ms)
+  Rendered operators/new.html.haml within layouts/application (5.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 68ms (Views: 67.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:35 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (3.0ms)
+  Rendered shared/_navigation.haml (0.5ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 80ms (Views: 78.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signup" for 127.0.0.1 at 2014-11-24 03:53:35 +0200
+Processing by OperatorsController#new as HTML
+  Rendered operators/_form.html.haml (4.9ms)
+  Rendered operators/new.html.haml within layouts/application (5.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 81ms (Views: 79.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2014-11-24 03:53:35 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.haml within layouts/application (2.6ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.1ms)
+Completed 200 OK in 67ms (Views: 66.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"D6hfhxqKwiXZVw7mjkyekmeZ5euYdMdze7DyzCqzReU=", "session"=>{"email"=>"", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mOperator Load (0.3ms)[0m  [1mSELECT  "operators".* FROM "operators"  WHERE "operators"."email" = '' LIMIT 1[0m
+  Rendered sessions/new.haml within layouts/application (2.5ms)
+  Rendered shared/_navigation.haml (0.3ms)
+  Rendered shared/_flash.haml (0.2ms)
+Completed 200 OK in 68ms (Views: 66.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/departments.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/operators.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:37 +0200
+
+
+Started GET "/assets/tickets.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:38 +0200
+
+
+Started GET "/assets/statuses.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:38 +0200
+
+
+Started GET "/assets/ti%D1%81kets.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:38 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:38 +0200
+
+
+Started GET "/assets/tickets_types.js?body=1" for 127.0.0.1 at 2014-11-24 03:53:38 +0200

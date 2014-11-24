@@ -1,0 +1,16 @@
+%p 
+  Dear: 
+  %b= @ticket.username
+
+%p You created new ticked.
+
+%p 
+  Key: 
+  %b= @ticket.key
+%p 
+  Subject: 
+  %b= @version.subject
+
+%p 
+  Follow your ticket:
+  %a{ href: url_for(controller: :tickets, action: :show, id: @ticket.key, only_path: false, host: @host) }= @ticket.key

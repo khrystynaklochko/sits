@@ -1,0 +1,21 @@
+%h1 Listing departments
+
+%table.table.table-hover.table-striped.table-bordered
+  %tr
+    %th #
+    %th Name
+    %th
+    %th
+    %th
+
+  - @departments.each do |department|
+    %tr
+      %td= department.id
+      %td= department.name
+      %td= link_to 'show', department
+      %td= link_to 'edit', edit_department_path(department)
+      %td= link_to 'destroy', department, :method => :delete, :data => { :confirm => 'are you sure?' }
+
+%br
+
+= link_to 'new department', new_department_path

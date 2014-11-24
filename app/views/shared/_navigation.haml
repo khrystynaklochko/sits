@@ -1,0 +1,20 @@
+.navbar.navbar-static-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+        %span.icon-th-list
+      %a.brand{ href: '/' } SITS
+      .nav-collapse
+        %ul.nav
+          %li{class: request.path == new_ticket_path && 'active'}= link_to "new ticket", new_ticket_path
+        %ul.nav.pull-right
+          - if current_user
+            %li{class: request.path == tickets_path && 'active'}= link_to "tickets", tickets_path
+            %li{class: request.path == operators_path && 'active'}= link_to "operators", operators_path
+            %li{class: request.path == departments_path && 'active'}= link_to "departments", departments_path
+            %li{class: request.path == statuses_path && 'active'}= link_to "statuses", statuses_path
+            %li.divider-vertical
+            %li= link_to "log out", '/logout'
+          - else
+            %li= link_to "log in", '/login'
+            %li= link_to "sign up", '/signup'

@@ -1,0 +1,12 @@
+- if notice || alert
+  .row-fluid
+    .span12
+      - if notice
+        %div{:class => "alert alert-success"}
+          %a.close{:href => "#", data: { dismiss: :alert } }  ×
+          = notice
+
+      - if alert
+        %div{:class => "alert"}
+          %a.close{:href => "#", data: { dismiss: :alert } } ×
+          = alert

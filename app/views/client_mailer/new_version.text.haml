@@ -1,0 +1,6 @@
+Your ticked was updated by operator.
+
+Key: #{@ticket.key}
+Subject: #{@version.subject}
+
+Follow your ticket: #{url_for controller: :tickets, action: :show, id: @ticket.key, only_path: false, host: @host}

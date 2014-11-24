@@ -1,0 +1,21 @@
+%h1 Listing statuses
+
+%table.table.table-hover.table-striped.table-bordered
+  %tr
+    %th #
+    %th Title
+    %th
+    %th
+    %th
+
+  - @statuses.each do |status|
+    %tr
+      %td= status.id
+      %td= status.title
+      %td= link_to 'show', status
+      %td= link_to 'edit', edit_status_path(status)
+      %td= link_to 'destroy', status, :method => :delete, :data => { :confirm => 'are you sure?' }
+
+%br
+
+= link_to 'new status', new_status_path

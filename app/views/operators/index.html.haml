@@ -1,0 +1,23 @@
+%h1 Listing operators
+
+%table.table.table-hover.table-striped.table-bordered
+  %tr
+    %th #
+    %th Name
+    %th Email
+    %th
+    %th
+    %th
+
+  - @operators.each do |operator|
+    %tr{class: (current_user && operator.id == current_user.id) && 'success'}
+      %td= operator.id
+      %td= operator.name
+      %td= operator.email
+      %td= link_to 'show', operator
+      %td= link_to 'edit', edit_operator_path(operator)
+      %td= link_to 'destroy', operator, :method => :delete, :data => { :confirm => 'are you sure?' }
+
+%br
+
+= link_to 'new operator', new_operator_path
